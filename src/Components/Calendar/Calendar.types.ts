@@ -6,11 +6,9 @@ export type Appointment = {
   address: string;
 };
 
-export type Blockout = { id: number; name: string };
-
 export type EventItem = {
   start: Date;
   end: Date;
-  data?: { appointment?: Appointment; blockout?: Blockout };
+  data?: { appointment?: Appointment };
   isDraggable?: boolean;
 };

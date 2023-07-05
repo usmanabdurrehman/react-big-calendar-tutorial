@@ -1,5 +1,5 @@
 import moment from "moment";
-import { EventItem } from "./CustomCalendar.types";
+import { EventItem } from "./Calendar.types";
 
 export enum AppointmentStatusCode {
   Pending = "P",
@@ -39,15 +39,5 @@ export const EVENTS: EventItem[] = [
       },
     },
     isDraggable: false,
-  },
-  {
-    start: moment("2022-10-12T09:00:00").toDate(),
-    end: moment("2022-10-12T14:59:59").toDate(),
-    data: {
-      blockout: {
-        id: 1,
-        name: "Christmas Holidays",
-      },
-    },
   },
 ];

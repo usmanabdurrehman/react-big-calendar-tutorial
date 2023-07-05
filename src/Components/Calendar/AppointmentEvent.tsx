@@ -1,10 +1,9 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import React from "react";
 import {
   AppointmentStatusCode,
   EVENT_STATUS_COLORS,
-} from "./CustomCalendar.constants";
-import { Appointment } from "./CustomCalendar.types";
+} from "./Calendar.constants";
+import { Appointment } from "./Calendar.types";
 
 export default function AppointmentEvent({
   appointment,
