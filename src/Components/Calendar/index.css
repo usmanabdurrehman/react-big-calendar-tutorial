@@ -10,6 +10,8 @@
   border-radius: 0px !important;
   border: none !important;
   background-color: transparent !important;
+  z-index: 2;
+  position: relative;
 }
 
 .rbc-background-event {
@@ -17,12 +19,6 @@
   border-radius: 0px !important;
   border: none !important;
   background-color: transparent !important;
-}
-
-.rbc-time-slot {
-  background-color: #eaf3fa;
-  color: #74a4c3;
-  border-color: aqua !important;
 }
 
 .rbc-event-label {
@@ -35,4 +31,22 @@
 
 .rbc-timeslot-group {
   min-height: 120px !important;
+}
+
+.rbc-day-slot .rbc-time-slot:after {
+  content: "";
+  width: 100%;
+  border-top: 1px solid lightblue;
+  display: block;
+}
+
+.rbc-time-slot {
+  background: #eaf3fa;
+  color: #74a4c3;
+  z-index: 1;
+}
+
+.rbc-addons-dnd-resizable {
+  height: 100%;
+  width: 100%;
 }

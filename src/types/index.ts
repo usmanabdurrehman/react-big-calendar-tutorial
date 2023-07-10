@@ -4,6 +4,8 @@ export type Appointment = {
   location: string;
   resource: string;
   address: string;
+  start: string;
+  end: string;
 };
 
 export type EventItem = {

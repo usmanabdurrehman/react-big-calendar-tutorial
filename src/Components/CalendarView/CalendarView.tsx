@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Calendar } from "../Calendar/Calendar";
-import { Appointment } from "../Calendar/Calendar.types";
+import { Appointment } from "../../types";
 import EventForm from "../EventForm/EventForm";
 
 export default function CalendarView() {
@@ -12,7 +12,7 @@ export default function CalendarView() {
         <Calendar onShowAppointmentView={setAppointment} />
       </Flex>
       <Flex grow={1} flexBasis={"50%"}>
-        <EventForm appointment={appointment} />
+        {appointment && <EventForm appointment={appointment} />}
       </Flex>
     </Flex>
   );

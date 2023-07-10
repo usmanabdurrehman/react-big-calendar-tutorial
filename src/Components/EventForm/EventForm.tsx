@@ -7,19 +7,19 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Field, Form, Formik } from "formik";
 import { useMemo } from "react";
-import { Appointment } from "../Calendar/Calendar.types";
+import { Appointment } from "../../types";
 
 interface EventFormProps {
-  appointment: Appointment | undefined;
+  appointment: Appointment;
 }
 
 export default function EventForm({ appointment }: EventFormProps) {
   const label = appointment?.id ? "Update" : "Create";
 
-  const initialValues = useMemo(() => appointment || {}, [appointment]);
+  const initialValues = useMemo(() => appointment, [appointment]);
 
   return (
     <Box boxShadow={"2xl"} padding="10" rounded="xl" bg="white" width="100%">
@@ -58,7 +58,7 @@ export default function EventForm({ appointment }: EventFormProps) {
                     {({ field }: any) => (
                       <FormControl>
                         <FormLabel>Start Time</FormLabel>
-                        <DatePicker label="Basic date time picker" />
+                        {/* <DatePicker label="Basic date time picker" /> */}
                       </FormControl>
                     )}
                   </Field>
