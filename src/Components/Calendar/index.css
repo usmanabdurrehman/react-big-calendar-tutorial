@@ -22,7 +22,3 @@
 .rbc-timeslot-group {
   min-height: 120px !important;
 }
-
-.draggable.dragging {
-  opacity: 1;
-}
