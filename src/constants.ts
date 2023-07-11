@@ -1,5 +1,5 @@
 import moment from "moment";
-import { EventItem } from "./CustomCalendar.types";
+import { EventItem } from "./types";
 
 export enum AppointmentStatusCode {
   Pending = "P",
@@ -25,6 +25,7 @@ export const EVENTS: EventItem[] = [
       },
     },
     isDraggable: true,
+    resourceId: 1,
   },
   {
     start: moment("2022-10-10T12:00:00").toDate(),
@@ -38,16 +39,8 @@ export const EVENTS: EventItem[] = [
         address: "Block 1\nSStreet 32\nLong Island\nNew York",
       },
     },
-    isDraggable: false,
-  },
-  {
-    start: moment("2022-10-12T09:00:00").toDate(),
-    end: moment("2022-10-12T14:59:59").toDate(),
-    data: {
-      blockout: {
-        id: 1,
-        name: "Christmas Holidays",
-      },
-    },
+    isDraggable: true,
+    isResizable: true,
+    resourceId: 2,
   },
 ];

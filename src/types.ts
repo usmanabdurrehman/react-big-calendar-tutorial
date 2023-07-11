@@ -6,11 +6,11 @@ export type Appointment = {
   address: string;
 };
 
-export type Blockout = { id: number; name: string };
-
 export type EventItem = {
-  start: Date;
-  end: Date;
-  data?: { appointment?: Appointment; blockout?: Blockout };
+  start?: Date | string;
+  end?: Date | string;
+  data?: { appointment?: Appointment };
   isDraggable?: boolean;
+  isResizable?: boolean;
+  resourceId?: number;
 };
