@@ -3,12 +3,15 @@
   border-radius: 0px !important;
   border: none !important;
   background-color: transparent !important;
+  position: relative;
+  z-index: 2;
 }
 
 .rbc-time-slot {
   background-color: #eaf3fa;
   color: #74a4c3;
   border-color: aqua !important;
+  z-index: 1;
 }
 
 .rbc-event-label {

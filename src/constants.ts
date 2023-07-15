@@ -24,7 +24,6 @@ export const EVENTS: EventItem[] = [
         address: "Building 5\nStreet 44\nNear Express Highway\nNew York",
       },
     },
-    isDraggable: true,
     resourceId: 1,
   },
   {
@@ -39,8 +38,6 @@ export const EVENTS: EventItem[] = [
         address: "Block 1\nSStreet 32\nLong Island\nNew York",
       },
     },
-    isDraggable: true,
-    isResizable: true,
     resourceId: 2,
   },
 ];
