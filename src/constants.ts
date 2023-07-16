@@ -13,8 +13,8 @@ export const EVENT_STATUS_COLORS = {
 
 export const EVENTS: EventItem[] = [
   {
-    start: moment("2022-10-10T10:00:00").toDate(),
-    end: moment("2022-10-10T11:00:00").toDate(),
+    start: moment("2022-10-10T09:00:00").toDate(),
+    end: moment("2022-10-10T10:00:00").toDate(),
     data: {
       appointment: {
         id: 1,
@@ -28,8 +28,8 @@ export const EVENTS: EventItem[] = [
     resourceId: 1,
   },
   {
-    start: moment("2022-10-10T12:00:00").toDate(),
-    end: moment("2022-10-10T13:00:00").toDate(),
+    start: moment("2022-10-10T10:30:00").toDate(),
+    end: moment("2022-10-10T11:00:00").toDate(),
     data: {
       appointment: {
         id: 2,

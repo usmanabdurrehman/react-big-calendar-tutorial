@@ -7,8 +7,6 @@ export default function OutsideEvent({ children, ...rest }: BoxProps) {
       bg="#1b4e3f"
       color="white"
       cursor={"pointer"}
-      draggable
-      className="draggable"
       style={{ border: "1px solid black" }}
       {...rest}
     >
