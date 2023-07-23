@@ -7,8 +7,12 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from "moment";
 import "./index.css";
 import AppointmentEvent from "./AppointmentEvent";
-import { Appointment } from "../../types";
+import { Appointment, EventItem } from "../../types";
 import { EVENTS } from "./Calendar.constants";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useMemo } from "react";
+import { useAppointments } from "../../requests";
 
 const localizer = momentLocalizer(moment);
 
@@ -22,7 +26,7 @@ const initProps = {
   timeslots: 4,
 };
 
-const DndCalendar = withDragAndDrop(BigCalendar);
+const DndCalendar = withDragAndDrop<EventItem>(BigCalendar);
 interface CalendarProps {
   onShowAppointmentView: (appointment: Appointment) => void;
 }
@@ -31,12 +35,11 @@ export const Calendar = ({ onShowAppointmentView }: CalendarProps) => {
   const components = {
     event: ({ event }: { event: any }) => {
       const data = event?.data;
-      console.log("we here");
       if (data?.appointment)
         return (
           <AppointmentEvent
             appointment={data?.appointment}
-            onDoubleClick={onShowAppointmentView}
+            onDoubleClick={() => {}}
           />
         );
 
@@ -44,11 +47,27 @@ export const Calendar = ({ onShowAppointmentView }: CalendarProps) => {
     },
   };
 
+  const { data } = useAppointments();
+
+  const appointments = data?.map((appointment) => ({
+    start: new Date(appointment.start),
+    end: new Date(appointment.end),
+    data: { appointment },
+  }));
+
   return (
     <DndCalendar
-      events={EVENTS}
+      onSelectSlot={({ start, end }) => {
+        onShowAppointmentView({ start, end });
+      }}
+      onDoubleClickEvent={(event) => {
+        const appointment = event?.data?.appointment;
+        appointment && onShowAppointmentView(appointment);
+      }}
+      events={appointments}
       style={{ width: "100%" }}
       components={components}
+      selectable
       {...initProps}
     />
   );

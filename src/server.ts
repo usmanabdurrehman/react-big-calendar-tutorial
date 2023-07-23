@@ -1,5 +1,6 @@
 import { Appointment } from "./types";
 import express from "express";
+import cors from "cors";
 const app = express();
 
 let appointments: Appointment[] = [
@@ -14,6 +15,7 @@ let appointments: Appointment[] = [
   },
 ];
 
+app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 
 app.get("/appointments", (req, res) => {

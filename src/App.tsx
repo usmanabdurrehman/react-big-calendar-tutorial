@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { ChakraProvider, Flex } from "@chakra-ui/react";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ChakraProvider } from "@chakra-ui/react";
 import CalendarView from "./Components/CalendarView/CalendarView";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: 0,
+    },
+  },
+});
 
 function App() {
   return (
     <ChakraProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <QueryClientProvider client={queryClient}>
         <div style={{ height: "95vh" }}>
           <CalendarView />
         </div>
-      </LocalizationProvider>
+      </QueryClientProvider>
     </ChakraProvider>
   );
 }
