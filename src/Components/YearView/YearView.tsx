@@ -1,15 +1,10 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import {
-  DateLocalizer,
-  Navigate,
-  stringOrDate,
-  ViewProps,
-  Views,
-} from "react-big-calendar";
+import { useMemo } from "react";
+import { DateLocalizer, Navigate, ViewProps, Views } from "react-big-calendar";
 import Calendar from "react-calendar";
 import { Grid, GridItem } from "@chakra-ui/react";
 import "react-calendar/dist/Calendar.css";
+import "./index.css";
+import moment from "moment";
 
 export default function YearView({
   date,
@@ -19,15 +14,12 @@ export default function YearView({
   scrollToTime = localizer.startOf(new Date(), "day"),
   onView,
   onNavigate,
-  ...props
+  events,
 }: ViewProps) {
-  // console.log({ props });
   const currRange = useMemo(
     () => YearView.range(date, { localizer }),
     [date, localizer]
   );
-
-  // console.log({ currRange });
 
   return (
     <Grid templateColumns="repeat(4, 1fr)" gap={6}>
@@ -39,6 +31,16 @@ export default function YearView({
               console.log({ day });
               onView && onView(Views.DAY);
               onNavigate(day);
+            }}
+            tileClassName={({ date, view }) => {
+              if (
+                view === "month" &&
+                events?.find((event) =>
+                  moment(event.start)?.isSame(moment(date), "day")
+                )
+              )
+                return "event-day";
+              return null;
             }}
           />
         </GridItem>
@@ -59,11 +61,6 @@ YearView.range = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
     current = localizer.add(current, 1, "month");
   }
 
-  // console.log(
-  //   range.map((r) => r.toISOString()),
-  //   date.toISOString()
-  // );
-
   return range;
 };
 
@@ -72,7 +69,6 @@ YearView.navigate = (
   action: any,
   { localizer }: { localizer: DateLocalizer }
 ) => {
-  console.log("we here", date, action);
   if (action instanceof Date) return action;
 
   switch (action) {
@@ -83,7 +79,6 @@ YearView.navigate = (
       return localizer.add(date, 1, "year");
 
     default:
-      console.log("we here in default");
       return date;
   }
 };

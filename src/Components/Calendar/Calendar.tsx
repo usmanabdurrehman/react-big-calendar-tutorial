@@ -1,18 +1,34 @@
 import {
   Calendar as BigCalendar,
-  CalendarProps,
   momentLocalizer,
   Views,
   View,
 } from "react-big-calendar";
 import moment from "moment";
-import { CustomView } from "../CustomView";
 import YearView from "../YearView/YearView";
 import { useState } from "react";
 
 const localizer = momentLocalizer(moment);
 
-export default function Calendar(props: Omit<CalendarProps, "localizer">) {
+const events = [
+  {
+    start: moment("2023-10-10T10:00:00").toDate(),
+    end: moment("2023-10-10T12:00:00").toDate(),
+    title: "MRI Registration",
+  },
+  {
+    start: moment("2023-01-10T10:00:00").toDate(),
+    end: moment("2023-01-10T11:00:00").toDate(),
+    title: "ENT Appointment",
+  },
+  {
+    start: moment("2023-06-10T10:00:00").toDate(),
+    end: moment("2023-06-10T11:00:00").toDate(),
+    title: "Plastic Surgery",
+  },
+];
+
+export default function Calendar() {
   const [date, setDate] = useState(new Date());
   const [view, setView] = useState<View>(Views.DAY);
   return (
@@ -21,21 +37,18 @@ export default function Calendar(props: Omit<CalendarProps, "localizer">) {
         {
           month: true,
           day: true,
-          week: CustomView,
+          week: true,
           year: YearView,
         } as any
       }
-      {...props}
       date={date}
-      onNavigate={(date) => {
-        console.log("onNavigate", date);
-        setDate(date);
-      }}
+      onNavigate={(date) => setDate(date)}
       localizer={localizer}
       defaultView={Views.WEEK}
       messages={{ year: "Year" } as any}
       view={view}
       onView={(newView) => setView(newView)}
+      events={events}
     />
   );
 }
