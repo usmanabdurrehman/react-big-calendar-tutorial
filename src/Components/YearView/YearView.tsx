@@ -9,52 +9,47 @@ import moment from "moment";
 export default function YearView({
   date,
   localizer,
-  max = localizer.endOf(new Date(), "day"),
-  min = localizer.startOf(new Date(), "day"),
-  scrollToTime = localizer.startOf(new Date(), "day"),
   onView,
   onNavigate,
   events,
 }: ViewProps) {
-  const currRange = useMemo(
-    () => YearView.range(date, { localizer }),
-    [date, localizer]
-  );
+  const currRange = YearView.range(date, { localizer });
 
   return (
-    <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-      {currRange.map((month, index) => (
-        <GridItem w="100%" key={index}>
-          <Calendar
-            activeStartDate={month}
-            onClickDay={(day) => {
-              console.log({ day });
-              onView && onView(Views.DAY);
-              onNavigate(day);
-            }}
-            tileClassName={({ date, view }) => {
-              if (
-                view === "month" &&
-                events?.find((event) =>
-                  moment(event.start)?.isSame(moment(date), "day")
+    <Grid templateColumns={"repeat(4, 1fr)"} gap={6}>
+      {currRange.map((month, index) => {
+        return (
+          <GridItem w="100%" key={index}>
+            <Calendar
+              activeStartDate={month}
+              tileClassName={({ date, view }) => {
+                if (
+                  view === "month" &&
+                  events?.find((event) =>
+                    moment(event.start).isSame(moment(date), "day")
+                  )
                 )
-              )
-                return "event-day";
-              return null;
-            }}
-          />
-        </GridItem>
-      ))}
+                  return "event-day";
+                return null;
+              }}
+              onClickDay={(day) => {
+                onView && onView(Views.DAY);
+                onNavigate(day);
+              }}
+            />
+          </GridItem>
+        );
+      })}
     </Grid>
   );
 }
 
 YearView.range = (date: Date, { localizer }: { localizer: DateLocalizer }) => {
   const start = localizer.startOf(date, "year");
-  const end = localizer.endOf(start, "year");
+  const end = localizer.endOf(date, "year");
 
-  let current = start;
   const range = [];
+  let current = start;
 
   while (localizer.lte(current, end, "year")) {
     range.push(current);
@@ -72,12 +67,10 @@ YearView.navigate = (
   if (action instanceof Date) return action;
 
   switch (action) {
-    case Navigate.PREVIOUS:
-      return localizer.add(date, -1, "year");
-
     case Navigate.NEXT:
       return localizer.add(date, 1, "year");
-
+    case Navigate.PREVIOUS:
+      return localizer.add(date, -1, "year");
     default:
       return date;
   }

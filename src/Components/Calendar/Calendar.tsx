@@ -29,10 +29,18 @@ const events = [
 ];
 
 export default function Calendar() {
+  const [view, setView] = useState(Views.WEEK);
   const [date, setDate] = useState(new Date());
-  const [view, setView] = useState<View>(Views.DAY);
+
   return (
     <BigCalendar
+      localizer={localizer}
+      defaultView={Views.WEEK}
+      view={view}
+      date={date}
+      onView={(view) => setView(view)}
+      onNavigate={(date) => setDate(date)}
+      events={events}
       views={
         {
           month: true,
@@ -41,14 +49,7 @@ export default function Calendar() {
           year: YearView,
         } as any
       }
-      date={date}
-      onNavigate={(date) => setDate(date)}
-      localizer={localizer}
-      defaultView={Views.WEEK}
       messages={{ year: "Year" } as any}
-      view={view}
-      onView={(newView) => setView(newView)}
-      events={events}
     />
   );
 }
