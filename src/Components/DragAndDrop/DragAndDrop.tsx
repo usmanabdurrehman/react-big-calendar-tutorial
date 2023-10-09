@@ -30,10 +30,18 @@ export default function DragAndDrop() {
     <CustomCalendar
       resizable
       onEventDrop={({ start, end, event }) => {
-        onChangeEventTime(start, end, event?.data?.appointment?.id);
+        onChangeEventTime(
+          start as Date,
+          end as Date,
+          (event as EventItem)?.data?.appointment?.id
+        );
       }}
       onEventResize={({ start, end, event }) => {
-        onChangeEventTime(start, end, event?.data?.appointment?.id);
+        onChangeEventTime(
+          start as Date,
+          end as Date,
+          (event as EventItem)?.data?.appointment?.id
+        );
       }}
       events={events}
     />
