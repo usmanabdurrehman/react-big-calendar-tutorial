@@ -17,31 +17,39 @@ import { css } from "@emotion/css";
 export default function DragAndDrop() {
   const [zoom, setZoom] = useState([0]);
   return (
-    <Flex p={2} gap={4} height="100%" width="100%" direction={"column"}>
-      <Box bg="#0cff52" borderRadius={12} display="flex" alignItems={"center"}>
+    <Flex p={2} gap={4} height="100%" width="470px" direction={"column"}>
+      <Box p={2}>
         <RangeSlider
           value={zoom}
           onChange={(zoom) => setZoom(zoom)}
-          min={0}
+          min={5}
           max={20}
         >
           <RangeSliderTrack>
             <RangeSliderFilledTrack />
           </RangeSliderTrack>
-          <RangeSliderThumb boxSize={6} index={0} />
+          <RangeSliderThumb
+            boxSize={6}
+            index={0}
+            className={css({ background: "#bee2fa" })}
+            style={{ background: "#bee2fa" }}
+          />
         </RangeSlider>
       </Box>
-      <Box
-        className={css({
-          ".rbc-timeslot-group": {
-            minHeight: `${zoom?.[0] * 24}px !important`,
-          },
-        })}
-        flex="1"
-        overflow="auto"
-        width="100%"
-      >
-        <BigCalendar {...props} events={EVENTS} timeslots={4} step={15} />
+
+      <Box flex="1" overflow="auto" width="100%">
+        <BigCalendar
+          {...props}
+          events={EVENTS}
+          timeslots={4}
+          step={15}
+          toolbar={false}
+          className={css({
+            ".rbc-timeslot-group": {
+              minHeight: `${zoom?.[0] * 24}px !important`,
+            },
+          })}
+        />
       </Box>
     </Flex>
   );
