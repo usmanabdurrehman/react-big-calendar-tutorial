@@ -9,13 +9,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@types/react-big-calendar": "^1.6.1",
+    "framer-motion": "^10.12.3",
     "react": "^18.2.0",
     "react-big-calendar": "^1.6.8",
+    "react-bootstrap-icons": "^1.10.3",
+    "react-datepicker": "^5.0.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
+    "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.3",
