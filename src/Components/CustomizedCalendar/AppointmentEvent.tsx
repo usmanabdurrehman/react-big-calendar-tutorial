@@ -7,7 +7,7 @@ export default function AppointmentEvent({
   isMonthView,
 }: {
   appointment: Appointment;
-  isMonthView: boolean;
+  isMonthView?: boolean;
 }) {
   const { location, status, resource, address } = appointment;
   const background = EVENT_STATUS_COLORS[status as AppointmentStatusCode];
@@ -18,7 +18,7 @@ export default function AppointmentEvent({
       p={1}
       height="100%"
       color="black"
-      {...(isMonthView ? { overflow: "hidden", h: 8 } : {})}
+      {...(isMonthView ? { overflow: "hidden", h: 7 } : {})}
     >
       <Flex alignItems={"center"} justifyContent="space-between">
         <Flex>

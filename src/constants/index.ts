@@ -8,7 +8,7 @@ export const VIEW_OPTIONS = [
   { id: Views.MONTH, label: "Month" },
 ];
 
-export const RESOURCES_LIST = [
+export const RESOURCES = [
   { id: 1, title: "Dr Alex" },
   { id: 2, title: "Dr John" },
 ];
@@ -47,14 +47,19 @@ export const EVENTS: EventItem[] = [
         status: "CI",
         location: "Washington",
         resource: "Dr David",
-        address: "Block 1\nSStreet 32\nLong Island\nNew York",
+        address: "Block 1\nStreet 32\nLong Island\nNew York",
       },
     },
     resourceId: 2,
   },
-];
-
-const RESOURCES = [
-  { id: 1, title: "Dr Alex" },
-  { id: 1, title: "Dr David" },
+  {
+    start: moment("2022-10-13T10:00:00").toDate(),
+    end: moment("2022-10-13T13:00:00").toDate(),
+    data: {
+      blockout: {
+        id: 1,
+        name: "Independence Day",
+      },
+    },
+  },
 ];

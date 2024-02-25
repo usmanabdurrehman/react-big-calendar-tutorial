@@ -19,7 +19,7 @@ import moment from "moment";
 import { cloneElement, useCallback, useMemo, useState } from "react";
 import { EventProps, Views } from "react-big-calendar";
 import { ArrowLeft, ArrowRight, ZoomIn, ZoomOut } from "react-bootstrap-icons";
-import { EVENTS, RESOURCES_LIST, VIEW_OPTIONS } from "../../constants";
+import { EVENTS, RESOURCES, VIEW_OPTIONS } from "../../constants";
 import { EventItem } from "../../types";
 import Calendar from "../Calendar";
 import AppointmentEvent from "./AppointmentEvent";
@@ -27,6 +27,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.css";
+import BlockoutEvent from "./BlockoutEvent";
 
 const mapLines = (nthChild: string, width: number) =>
   `.rbc-day-slot .rbc-time-slot:nth-child(${nthChild}):after {width: ${width}% !important;}`;
@@ -56,7 +57,7 @@ type Keys = keyof typeof Views;
 const PRIMARY_COLOR = "#17405d";
 const SECONDARY_COLOR = "#246899";
 
-export default function CustomizedCalendar() {
+export default function Demo() {
   const [date, setDate] = useState<Date>(moment("2022-10-10").toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [contextMenuInfo, setContextMenuInfo] = useState<{
@@ -110,6 +111,10 @@ export default function CustomizedCalendar() {
             isMonthView={view === Views.MONTH}
           />
         );
+
+      if (data?.blockout) {
+        return <BlockoutEvent blockout={data?.blockout} />;
+      }
 
       return null;
     },
@@ -264,7 +269,7 @@ export default function CustomizedCalendar() {
                     `You have selected ${moment(
                       contextMenuInfo?.selectedTime
                     )?.format("DD/MM/YYYY hh:mm a")} for resource ${
-                      RESOURCES_LIST.find(
+                      RESOURCES.find(
                         (resource) =>
                           resource.id === contextMenuInfo?.resourceId
                       )?.title
@@ -282,9 +287,9 @@ export default function CustomizedCalendar() {
           events={EVENTS}
           defaultDate={"2022-10-10"}
           defaultView={Views.WEEK}
-          min={moment("2022-10-10T08:00:00").toDate()}
+          min={moment("2022-10-10T09:00:00").toDate()}
           max={moment("2022-10-10T18:00:00").toDate()}
-          resources={view === Views.DAY ? RESOURCES_LIST : undefined}
+          resources={view === Views.DAY ? RESOURCES : undefined}
           // Custom Props
 
           // Components
@@ -297,14 +302,6 @@ export default function CustomizedCalendar() {
           onNavigate={setDate}
           step={STEP}
           timeslots={TIME_SLOTS}
-
-          // Misc Custom Props
-
-          // formats
-          // rtl
-          // views
-          // messages
-          // timeslots
         />
       </Box>
     </Flex>

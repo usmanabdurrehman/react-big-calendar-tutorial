@@ -16,7 +16,7 @@ export default function NormalCalendar() {
         events={EVENTS}
         defaultDate={"2022-10-10"}
         defaultView={Views.WEEK}
-        min={moment("2022-10-10T08:00:00").toDate()}
+        min={moment("2022-10-10T09:00:00").toDate()}
         max={moment("2022-10-10T18:00:00").toDate()}
       />
     </Box>
